@@ -114,7 +114,6 @@
       transform:translateY(-50%);
       pointer-events:none;
     }
-    /* Adjustment 1: Made the target larger for easier viewing and interacting on mobile screens */
     .target{
       position:relative;
       width:clamp(140px, 35vw, 208px);
@@ -140,7 +139,6 @@
       will-change:transform;
     }
 
-    /* Adjustment 1: Added padding and increased width of archery box for better mobile tabbing */
     .archery{
       position:absolute; top:0; left:0;
       width:clamp(120px, 25vw, 168px);
@@ -256,7 +254,7 @@
     .hl__line{ display:block; }
     .mask{ display:inline-block; overflow:hidden; padding:.14em .06em; margin:-.14em -.06em; }
     .hl__word{
-      display:inline-block; font-weight:900; font-size:clamp(52px, 15vw, 168px);
+      display:inline-block; font-weight:900; font-size:clamp(65px, 18vw, 180px);
       letter-spacing:-.02em; color:#fff6f1;
       text-shadow:0 6px 34px rgba(60,4,24,.34), 0 2px 3px rgba(90,8,36,.42);
     }
@@ -288,8 +286,9 @@
       will-change:transform, opacity; pointer-events:none;
     }
 
+    /* Fixed cut-off text issue: increased max-width, white-space, and clip-path padding */
     .wish{
-      position:absolute; left:5.5%; bottom:10%; max-width:46%; z-index:6; pointer-events:none; color:var(--ink); visibility:hidden;
+      position:absolute; left:5.5%; bottom:10%; max-width:85%; z-index:6; pointer-events:none; color:var(--ink); visibility:hidden;
     }
     .wish.is-in{ visibility:visible; }
     .wish::before{
@@ -313,13 +312,15 @@
       content:"\2726"; position:absolute; right:-1%; top:-14%; font-size:clamp(15px, 3.6vw, 32px);
       color:#ffe1a0; text-shadow:0 0 12px rgba(255,205,120,.95); opacity:0; pointer-events:none;
     }
+    
     .wish__hero{
-      font-family:"Great Vibes", cursive; font-weight:400; font-size:clamp(40px, 9.6vw, 86px);
+      font-family:"Great Vibes", cursive; font-weight:400; font-size:clamp(48px, 13vw, 96px);
       line-height:.98; margin:-.02em 0 .06em;
       background:linear-gradient(180deg, #e85a83 0%, #c41f52 50%, #9c0f42 100%);
       -webkit-background-clip:text; background-clip:text; color:transparent;
       filter: drop-shadow(0 1px 1px rgba(255,252,248,.98)) drop-shadow(0 2px 6px rgba(130,18,55,.45));
-      clip-path:inset(0 100% -28% -10%); transform-origin:8% 60%;
+      clip-path:inset(-20% 100% -40% -20%); transform-origin:8% 60%;
+      white-space: nowrap; /* Ensures text doesn't wrap and break on smaller screens */
     }
     .wish__rule{
       display:block; width:clamp(46px, 13vw, 110px); height:2px; margin:.12em 0 .48em;
@@ -344,7 +345,7 @@
     @keyframes wishBreath{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.02); } }
     .wish.is-in .wish__heroWrap::before{ animation:hlin .8s ease .3s forwards, hlpulse 3.4s ease-in-out 1.7s infinite; }
     .wish.is-in .wish__heroWrap::after{ animation:twk 2.6s ease-in-out 1.6s infinite; }
-    @keyframes write{ from{ clip-path:inset(0 100% -28% -10%); } to{ clip-path:inset(0 -10% -28% -10%); } }
+    @keyframes write{ from{ clip-path:inset(-20% 100% -40% -20%); } to{ clip-path:inset(-20% -20% -40% -20%); } }
     @keyframes hlin{ from{ opacity:0; transform:scale(.86); } to{ opacity:.92; transform:scale(1); } }
     @keyframes hlpulse{ 0%,100%{ opacity:.72; } 50%{ opacity:1; } }
     @keyframes twk{ 0%,100%{ opacity:0; transform:scale(.5) rotate(-12deg); } 45%{ opacity:1; transform:scale(1.05) rotate(16deg); } }
@@ -366,8 +367,8 @@
       position: absolute; left: 50%; bottom: 12%; z-index: 7; transform: translate(-50%, 15px);
       display: flex; flex-direction: row; align-items: center; justify-content: center;
       padding: 12px 36px; border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.2); 
+      border: 1px solid rgba(255, 255, 255, 0.45);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 0 10px rgba(255,255,255,0.1);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       cursor: pointer; opacity: 0; 
@@ -375,17 +376,18 @@
     }
     .continue.is-shown { opacity: 1; transform: translate(-50%, 0); }
     .continue:hover {
-      background: rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(255, 255, 255, 0.7);
       transform: translate(-50%, -3px);
       box-shadow: 0 8px 25px rgba(0,0,0,0.3), inset 0 0 12px rgba(255,255,255,0.2);
     }
     .continue:active { transform: translate(-50%, 0); }
     
     .continue__label {
-      font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 700;
+      font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 800; 
       font-size: clamp(16px, 4vw, 22px); letter-spacing: .12em; text-transform: uppercase;
-      color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      color: #111; 
+      text-shadow: none; 
     }
 
     .grade{ position:absolute; inset:0; z-index:9; pointer-events:none; }
@@ -396,7 +398,6 @@
     }
     .grade__grain{
       position:absolute; inset:0;
-      /* Using an inline SVG noise for standard grain effect */
       background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E") repeat;
       background-size:150px; opacity:.06; mix-blend-mode:overlay;
     }
@@ -406,7 +407,7 @@
       z-index:5; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
       color:#fbe9d8; background:rgba(255,255,255,.08); border:1px solid rgba(255,223,180,.28);
       backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:pointer; 
-      transition:background .25s ease, transform .25s var(--ease-out), border-color .25s ease;
+      transition:background .25s ease, transform .25s var(--ease-out), border-color .25s ease, opacity 0.8s ease;
     }
     .roomClose:hover{ background:rgba(255,255,255,.16); border-color:rgba(255,223,180,.5); transform:scale(1.06); }
     .roomClose:active{ transform:scale(.94); }
@@ -456,25 +457,39 @@
     }
     .gallery.is-open .gallery__eyebrow{ opacity:.86; transform:translateY(0); }
 
-    /* Adjustment 2: Modified the aspect-ratio to 4/3 and updated width/height constraints for responsive sizing */
     .gallery__stage{
       position:relative; width:min(96vw, 800px); aspect-ratio:4/3; max-height:60vh; max-height:60dvh; border-radius:10px; overflow:hidden;
       box-shadow:0 30px 70px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,224,180,.14);
+      transition: transform 1s ease, box-shadow 1s ease, border 1s ease;
     }
     .slide{ position:absolute; inset:0; opacity:0; transition:opacity 1s var(--ease-luxe); }
     .slide.is-active{ opacity:1; z-index:1; }
-    /* Version 3.0 Addition: Adding video support styling seamlessly */
     .slide img, .slide video { width:100%; height:100%; object-fit:cover; display:block; transform:scale(1.08); }
-    /* Adjustment 2: Scaled the beginning of Ken Burns animation for smoother zooming like 'cat moving' effect */
     .slide.is-active img, .slide.is-active video { animation:kenBurns 6.5s var(--ease-luxe) forwards; }
     
     @keyframes kenBurns{
       from{ transform:scale(1.08) translate(var(--kbx0,0), var(--kby0,0)); }
       to  { transform:scale(1.0)  translate(var(--kbx1,0), var(--kby1,0)); }
     }
-    .gallery__stage::after{ content:""; position:absolute; inset:0; pointer-events:none; border-radius:10px; border:1px solid rgba(255,224,180,.35); }
-    .gallery__stage::before{ content:""; position:absolute; inset:0; z-index:2; pointer-events:none; box-shadow:inset 0 -50px 60px -40px rgba(0,0,0,.55), inset 0 40px 50px -40px rgba(0,0,0,.3); }
+    .gallery__stage::after{ content:""; position:absolute; inset:0; pointer-events:none; border-radius:10px; border:1px solid rgba(255,224,180,.35); transition: opacity 1s ease; }
+    .gallery__stage::before{ content:""; position:absolute; inset:0; z-index:2; pointer-events:none; box-shadow:inset 0 -50px 60px -40px rgba(0,0,0,.55), inset 0 40px 50px -40px rgba(0,0,0,.3); transition: opacity 1s ease; }
 
+    /* Custom Glassmorphism Play Button for Videos */
+    .slide__play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 70px; height: 70px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; z-index: 10; cursor: pointer;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .slide__play-btn:hover { background: rgba(255,255,255,0.4); transform: translate(-50%, -50%) scale(1.1); }
+    .slide__play-btn.is-hidden { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.8); }
+
+    /* Fixed Arrows displaying on Mobile too */
     .gallery__arrow{
       position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%; z-index:3;
       display:flex; align-items:center; justify-content:center; color:#f6e6d6; background:rgba(255,255,255,.06);
@@ -482,13 +497,19 @@
       cursor:pointer; opacity:0; transition:opacity .5s ease .2s, background .2s ease, transform .2s var(--ease-out);
     }
     .gallery.is-open .gallery__arrow{ opacity:.85; }
-    .gallery__arrow:hover{ opacity:1; background:rgba(255,255,255,.14); }
+    .gallery__arrow:hover{ opacity:1; background:rgba(255,255,255,.14); transform:translateY(-50%) scale(1.1); }
     .gallery__arrow:active{ transform:translateY(-50%) scale(.92); }
     .gallery__arrow--prev{ left:clamp(6px, 2.4vw, 26px); }
     .gallery__arrow--next{ right:clamp(6px, 2.4vw, 26px); }
-    @media (max-width: 560px){ .gallery__arrow{ display:none; } }
+    
+    /* Slightly smaller arrows for mobile so they don't cover everything but are perfectly tappable */
+    @media (max-width: 560px){ 
+        .gallery__arrow { width: 36px; height: 36px; }
+        .gallery__arrow--prev { left: 8px; }
+        .gallery__arrow--next { right: 8px; }
+    }
 
-    .gallery__foot{ display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:clamp(16px,3vh,26px); text-align:center; }
+    .gallery__foot{ display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:clamp(16px,3vh,26px); text-align:center; transition: opacity 0.8s ease; }
     .gallery__caption{ min-height:1.4em; font-family:"Cormorant Garamond", Georgia, serif; font-style:italic; font-weight:500; font-size:clamp(15px, 3.4vw, 20px); color:#f7e9dc; text-shadow:0 2px 14px rgba(0,0,0,.4); }
     .gallery__dots{ display:flex; gap:7px; }
     .gallery__dots button{ width:6px; height:6px; border-radius:50%; padding:0; border:0; cursor:pointer; background:rgba(255,224,180,.32); transition:background .3s ease, transform .3s var(--ease-out); }
@@ -504,45 +525,21 @@
     .gallery__cta:hover{ transform:translateY(-2px); filter:brightness(1.06); }
     .gallery__cta:active{ transform:translateY(0); }
 
-    .cinema{
-      position:fixed; inset:0; z-index:50; background:#050203; opacity:0; visibility:hidden; pointer-events:none;
-      transition:opacity .6s var(--ease-luxe), visibility 0s linear .6s;
+    /* Cinematic Mode Styles for Gallery */
+    /* Removed .roomClose and .gallery__arrow from here so they stay visible! */
+    .gallery.is-cinematic .gallery__eyebrow,
+    .gallery.is-cinematic .gallery__foot {
+        opacity: 0 !important;
+        pointer-events: none;
     }
-    .cinema.is-open{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity .6s var(--ease-luxe), visibility 0s linear 0s; }
-    .cinema__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; }
-    .cinema__scrim{ position:absolute; inset:0; pointer-events:none; background:radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.5) 100%); opacity:0; transition:opacity .4s ease; }
-    .cinema.is-playing .cinema__scrim{ opacity:.0; }
-    .cinema:not(.is-playing) .cinema__scrim{ opacity:1; }
-
-    .cinema__bar{ position:absolute; left:0; right:0; height:9vh; height:9dvh; min-height:26px; background:#050203; z-index:2; pointer-events:none; transform:scaleY(1); transition:transform .6s var(--ease-luxe); }
-    .cinema__bar--top{ top:0; transform-origin:top; }
-    .cinema__bar--bot{ bottom:0; transform-origin:bottom; }
-    .cinema.is-playing .cinema__bar{ transform:scaleY(0); }
-
-    .cinema__play{
-      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:74px; height:74px; border-radius:50%; z-index:3;
-      display:flex; align-items:center; justify-content:center; color:var(--noir-1); background:radial-gradient(circle at 34% 30%, #fff6e8, var(--gold-1) 46%, var(--gold-2) 100%);
-      border:0; cursor:pointer; box-shadow:0 0 0 1px rgba(255,224,180,.4), 0 18px 40px -12px rgba(0,0,0,.7); transition:opacity .4s ease, transform .3s var(--ease-out);
+    .gallery.is-cinematic .gallery__stage {
+        transform: scale(1.15); /* cinematic zoom effect */
+        box-shadow: 0 40px 100px -20px rgba(0,0,0,0.95);
     }
-    .cinema__play svg{ margin-left:3px; }
-    .cinema__play:hover{ transform:translate(-50%,-50%) scale(1.06); }
-    .cinema.is-playing .cinema__play{ opacity:0; pointer-events:none; transform:translate(-50%,-50%) scale(.8); }
-
-    .cinema__mute{
-      position:absolute; left:max(18px, env(safe-area-inset-left)); bottom:max(20px, env(safe-area-inset-bottom));
-      z-index:3; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-      color:#fbe9d8; background:rgba(255,255,255,.08); border:1px solid rgba(255,223,180,.28);
-      backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:pointer; opacity:0; transition:opacity .4s ease, background .25s ease;
+    .gallery.is-cinematic .gallery__stage::after,
+    .gallery.is-cinematic .gallery__stage::before {
+        opacity: 0;
     }
-    .cinema.is-playing .cinema__mute{ opacity:1; }
-    .cinema__mute:hover{ background:rgba(255,255,255,.16); }
-
-    .cinema__label{
-      position:absolute; left:0; right:0; bottom:max(24px, env(safe-area-inset-bottom)); text-align:center; z-index:3; pointer-events:none;
-      font-family:"Cormorant Garamond", Georgia, serif; font-style:italic; font-weight:500; font-size:clamp(13px, 3vw, 17px); letter-spacing:.05em;
-      color:#f3e2d2; text-shadow:0 2px 12px rgba(0,0,0,.5); opacity:1; transition:opacity .4s ease;
-    }
-    .cinema.is-playing .cinema__label{ opacity:0; }
 
     @media (prefers-reduced-motion: reduce){
       .hero, .flood, .field, .bloom, .hero__ring{ display:none !important; }
@@ -552,13 +549,12 @@
       .wish.is-in .wish__heroWrap::before{ animation:none; opacity:.9; }
       .wish.is-in .wish__heroWrap::after{ animation:none; opacity:0; }
       .slide.is-active img, .slide.is-active video{ animation:none; transform:scale(1); }
-      .gallery, .cinema{ transition:opacity .3s ease, visibility 0s linear 0s; }
+      .gallery { transition:opacity .3s ease, visibility 0s linear 0s; }
     }
   </style>
 </head>
 <body>
-  <!-- Background Audio Player -->
-  <audio id="bgMusic" src="./dataset/music.mp3" loop preload="auto" autoplay></audio>
+  <audio id="bgMusic" src="./dataset/music.mp3" loop preload="auto" autoplay muted></audio>
   
   <button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle music">
     <svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true">
@@ -718,7 +714,6 @@
       Again
     </button>
 
-    <!-- Version 3.0 Addition: Glassmorphism Pill Surprise Button -->
     <button class="continue" id="continueBtn" type="button" hidden>
       <span class="continue__label">surprise</span>
     </button>
@@ -755,35 +750,6 @@
         <span>watch our film</span>
       </button>
     </div>
-  </section>
-
-  <section class="cinema" id="cinema" aria-hidden="true" aria-label="A short film">
-    <video class="cinema__video" id="cinemaVideo" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" playsinline muted loop preload="none"></video>
-    <div class="cinema__scrim" aria-hidden="true"></div>
-    <div class="cinema__bar cinema__bar--top" aria-hidden="true"></div>
-    <div class="cinema__bar cinema__bar--bot" aria-hidden="true"></div>
-
-    <button class="roomClose" id="cinemaClose" type="button" aria-label="Close the film">
-      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
-    </button>
-
-    <button class="cinema__play" id="cinemaPlay" type="button" aria-label="Play the film">
-      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
-    </button>
-
-    <button class="cinema__mute" id="cinemaMute" type="button" aria-label="Turn sound on" hidden>
-      <svg class="ic-off" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-        <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
-        <path d="M15.8 8.2l6 7.6M21.8 8.2l-6 7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-      </svg>
-      <svg class="ic-on" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" hidden>
-        <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
-        <path d="M15.5 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-        <path d="M18.2 6a9 9 0 010 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55" />
-      </svg>
-    </button>
-
-    <p class="cinema__label" id="cinemaLabel">a little film, just for you</p>
   </section>
 
   <p class="sr-only">Happy Birthday. Here&rsquo;s to a wonderful year ahead.</p>
@@ -844,12 +810,6 @@
     const galleryCaption= $('galleryCaption');
     const galleryDots   = $('galleryDots');
     const galleryToFilm = $('galleryToFilm');
-
-    const cinema      = $('cinema');
-    const cinemaVideo = $('cinemaVideo');
-    const cinemaClose = $('cinemaClose');
-    const cinemaPlay  = $('cinemaPlay');
-    const cinemaMute  = $('cinemaMute');
     
     const bgMusic = $('bgMusic');
     const musicToggle = $('musicToggle');
@@ -857,6 +817,7 @@
     const icPause = musicToggle.querySelector('.ic-pause');
     let wasMusicPlaying = false; 
     let userHasMuted = false; 
+    let audioStarted = false;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isRecord     = new URLSearchParams(location.search).has('record');
@@ -1358,6 +1319,8 @@
     }
 
     archery.addEventListener('pointerdown', (e) => {
+      initAudio();
+      
       if (played) return; drawing = true;
       try { archery.setPointerCapture(e.pointerId); } catch (_) {}
       startPX = e.clientX; startPY = e.clientY; startDraw = curDraw; e.preventDefault();
@@ -1389,13 +1352,11 @@
 
     function resetAll(){
       treeStop(); showWish(false); window.bdayDone = false; replayArmed = false; replay.classList.remove('is-shown'); replay.hidden = true;
-      continueBtn.classList.remove('is-shown'); continueBtn.hidden = true; closeGallery(); closeCinema();
+      continueBtn.classList.remove('is-shown'); continueBtn.hidden = true; closeGallery(); 
       if (filmTL){ filmTL.pause(0); }
       gsap.set([flood, bloom], { autoAlpha: 0 }); gsap.set(field, { autoAlpha: 0 }); gsap.set(arrow, { opacity: 1, scaleY: 1 }); played = false; enter();
     }
 
-    // Version 3.0 Dataset: Now handles both images and videos seamlessly. 
-    // Just drop video.mp4 into the dataset folder!
     const PHOTOS = [
       { src: './dataset/image1.png', caption: 'the ones that made me smile first', type: 'image' },
       { src: './dataset/image2.png', caption: 'a quiet afternoon, made golden', type: 'image' },
@@ -1408,6 +1369,8 @@
     ];
 
     let gIndex = 0, gTimer = 0, gBuilt = false, gDots = [];
+    let isCinematicMode = false;
+    let cinematicTimer = null;
 
     function buildGallery(){
       if (gBuilt) return; gBuilt = true;
@@ -1419,19 +1382,32 @@
         fig.style.setProperty('--kbx1', '0%'); fig.style.setProperty('--kby1', '0%');
         
         let media;
-        // Check if the current file is a video
         if (p.type === 'video') {
             media = document.createElement('video');
             media.src = p.src;
-            /* Adjustment 3: Ensure video has native controls so mobile users can tap play/pause easily */
-            media.controls = true;
-            // Playsinline stops it from entering full screen on iOS
             media.setAttribute('playsinline', '');
             media.setAttribute('webkit-playsinline', '');
-            media.loop = true;
+            media.loop = false;
+            
+            const playBtn = document.createElement('div');
+            playBtn.className = 'slide__play-btn';
+            playBtn.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" style="margin-left:3px;"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
+            
+            fig.appendChild(media);
+            fig.appendChild(playBtn);
+            
+            playBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                media.play().catch(()=>{});
+            });
+            
+            media.addEventListener('click', () => {
+                if (!media.paused) media.pause();
+                else media.play();
+            });
 
-            /* Adjustment 3: Sync video playback with background music */
             media.addEventListener('play', () => {
+                playBtn.classList.add('is-hidden');
                 if (!bgMusic.paused) {
                     wasMusicPlaying = true;
                     bgMusic.pause();
@@ -1440,12 +1416,25 @@
             });
 
             media.addEventListener('pause', () => {
+                playBtn.classList.remove('is-hidden');
                 if (wasMusicPlaying && !userHasMuted) {
                     bgMusic.play().then(updateMusicUI).catch(()=>{});
                 }
             });
             
-            // Safe fallback if local video file isn't uploaded yet
+            media.addEventListener('ended', () => {
+                playBtn.classList.remove('is-hidden');
+                if (wasMusicPlaying && !userHasMuted) {
+                    bgMusic.play().then(updateMusicUI).catch(()=>{});
+                }
+                
+                if (isCinematicMode) {
+                    let next = gIndex + 1;
+                    if (next >= PHOTOS.length) stopCinematicMode();
+                    else { showSlide(next, false); startCinematicLoop(); }
+                }
+            });
+
             media.onerror = function() {
               this.onerror = null;
               this.poster = `https://placehold.co/800x1000/2c1019/fbe9d8?text=Missing\\nVideo`;
@@ -1461,11 +1450,16 @@
               this.onerror = null; 
               this.src = `https://placehold.co/800x1000/2c1019/fbe9d8?text=Missing\\n${p.src.split('/').pop()}`;
             };
+            fig.appendChild(media);
         }
 
-        fig.appendChild(media); galleryStage.appendChild(fig);
+        galleryStage.appendChild(fig);
         const dot = document.createElement('button'); dot.type = 'button'; dot.setAttribute('aria-label', `Slide ${i + 1}`);
-        dot.addEventListener('click', () => showSlide(i, true)); galleryDots.appendChild(dot); gDots.push(dot);
+        dot.addEventListener('click', () => {
+            if (isCinematicMode) startCinematicLoop(); 
+            showSlide(i, true);
+        }); 
+        galleryDots.appendChild(dot); gDots.push(dot);
       });
     }
 
@@ -1479,35 +1473,39 @@
           s.classList.remove('is-active'); media.style.animation = 'none';
           void media.offsetWidth; media.style.animation = ''; s.classList.add('is-active');
           
-          // Smart Video Trigger
           if (media.tagName === 'VIDEO') {
               media.currentTime = 0;
-              // We do not auto-play video here anymore, user taps the play button which handles the sync!
               stopAutoplay();
+              
+              if (isCinematicMode) {
+                  clearInterval(cinematicTimer); 
+                  media.play().catch(()=>{}); 
+              } else {
+                  const playBtn = s.querySelector('.slide__play-btn');
+                  if (playBtn) playBtn.classList.remove('is-hidden');
+              }
           } else {
-              // Resume autoplay if it's an image
-              if (!userTriggered && gallery.classList.contains('is-open')) {
+              if (!userTriggered && gallery.classList.contains('is-open') && !isCinematicMode) {
                   startAutoplay();
               }
           }
         } else { 
           s.classList.remove('is-active'); 
-          if (media.tagName === 'VIDEO') {
-              media.pause();
-          }
+          if (media.tagName === 'VIDEO') media.pause();
         }
       });
       gDots.forEach((d, k) => d.classList.toggle('is-active', k === gIndex));
       galleryCaption.textContent = PHOTOS[gIndex].caption;
-      if (userTriggered) restartAutoplay();
+      
+      if (userTriggered && !isCinematicMode) restartAutoplay();
     }
     
     function gNext(){ showSlide(gIndex + 1); }
     function gPrev(){ showSlide(gIndex - 1); }
+    
     function startAutoplay(){ stopAutoplay(); gTimer = window.setInterval(gNext, 4200); }
     function stopAutoplay(){ if (gTimer){ clearInterval(gTimer); gTimer = 0; } }
     
-    // Only restart auto play if the current slide is NOT a video
     function restartAutoplay(){ 
         if (gallery.classList.contains('is-open')) {
             const isCurrentVideo = PHOTOS[gIndex].type === 'video';
@@ -1515,72 +1513,80 @@
         }
     }
 
+    // --- CINEMATIC SLIDESHOW MODE LOGIC ---
+    function startCinematicMode() {
+        isCinematicMode = true;
+        gallery.classList.add('is-cinematic');
+        stopAutoplay();
+        showSlide(0, false); 
+        startCinematicLoop();
+    }
+    
+    function startCinematicLoop() {
+        clearInterval(cinematicTimer);
+        cinematicTimer = setInterval(() => {
+            let next = gIndex + 1;
+            if (next >= PHOTOS.length) {
+                stopCinematicMode();
+            } else {
+                showSlide(next, false);
+            }
+        }, 5000); // 5 seconds per slide for cinematic effect
+    }
+    
+    function stopCinematicMode() {
+        isCinematicMode = false;
+        gallery.classList.remove('is-cinematic');
+        clearInterval(cinematicTimer);
+        restartAutoplay();
+    }
+
+    galleryToFilm.addEventListener('click', startCinematicMode);
+    // ----------------------------------------
+
     function openGallery(){
       buildGallery(); gallery.hidden = false; gallery.setAttribute('aria-hidden', 'false');
       requestAnimationFrame(() => { gallery.classList.add('is-open'); showSlide(0); if (!reduceMotion) startAutoplay(); });
     }
     function closeGallery(){
       if (!gallery.classList.contains('is-open')) return;
+      if (isCinematicMode) stopCinematicMode();
       gallery.classList.remove('is-open'); gallery.setAttribute('aria-hidden', 'true'); stopAutoplay();
-      // Ensure video is paused when modal closes
       const activeVideo = galleryStage.querySelector('.slide.is-active video');
       if (activeVideo) activeVideo.pause();
     }
 
     continueBtn.addEventListener('click', openGallery); galleryClose.addEventListener('click', closeGallery);
-    galleryNext.addEventListener('click', () => showSlide(gIndex + 1, true)); galleryPrev.addEventListener('click', () => showSlide(gIndex - 1, true));
-    galleryToFilm.addEventListener('click', () => { closeGallery(); openCinema(); });
+    
+    // Updated arrows to just move and reset cinematic loop (so it doesn't close cinematic mode!)
+    galleryNext.addEventListener('click', () => { 
+        if(isCinematicMode) startCinematicLoop(); 
+        showSlide(gIndex + 1, true); 
+    }); 
+    galleryPrev.addEventListener('click', () => { 
+        if(isCinematicMode) startCinematicLoop(); 
+        showSlide(gIndex - 1, true); 
+    });
 
     let gTouchX = 0, gTouching = false;
     galleryStage.addEventListener('pointerdown', (e) => { gTouching = true; gTouchX = e.clientX; });
     galleryStage.addEventListener('pointerup', (e) => {
       if (!gTouching) return; gTouching = false; const dx = e.clientX - gTouchX;
-      if (Math.abs(dx) > 40) (dx < 0 ? gNext() : gPrev());
+      if (Math.abs(dx) > 40) {
+          if (isCinematicMode) startCinematicLoop();
+          (dx < 0 ? gNext() : gPrev());
+      }
     });
     function armContinue(){ continueBtn.hidden = false; requestAnimationFrame(() => continueBtn.classList.add('is-shown')); }
 
-    function openCinema(){
-      cinema.hidden = false; cinema.setAttribute('aria-hidden', 'false'); requestAnimationFrame(() => cinema.classList.add('is-open'));
-      const req = cinema.requestFullscreen || cinema.webkitRequestFullscreen; if (req){ req.call(cinema).catch(() => {}); }
-      
-      musicToggle.style.opacity = '0';
-      musicToggle.style.pointerEvents = 'none';
-
-      wasMusicPlaying = !bgMusic.paused;
-      if (wasMusicPlaying) {
-          bgMusic.pause();
-      }
-    }
-    
-    function closeCinema(){
-      if (!cinema.classList.contains('is-open')) return;
-      cinema.classList.remove('is-open', 'is-playing'); cinema.setAttribute('aria-hidden', 'true'); cinemaVideo.pause(); cinemaMute.hidden = true;
-      if (document.fullscreenElement === cinema || document.webkitFullscreenElement === cinema){ (document.exitFullscreen || document.webkitExitFullscreen)?.call(document).catch(() => {}); }
-      
-      musicToggle.style.opacity = '1';
-      musicToggle.style.pointerEvents = 'auto';
-
-      if (wasMusicPlaying && !userHasMuted) {
-          bgMusic.play().then(updateMusicUI).catch(()=>{});
-      }
-    }
-
-    function toggleCinemaPlay(){
-      if (cinemaVideo.paused){ cinemaVideo.play().catch(() => {}); cinema.classList.add('is-playing'); cinemaMute.hidden = false; }
-      else { cinemaVideo.pause(); cinema.classList.remove('is-playing'); }
-    }
-    function toggleCinemaMute(){
-      cinemaVideo.muted = !cinemaVideo.muted; cinemaMute.querySelector('.ic-off').hidden = !cinemaVideo.muted; cinemaMute.querySelector('.ic-on').hidden = cinemaVideo.muted;
-      cinemaMute.setAttribute('aria-label', cinemaVideo.muted ? 'Turn sound on' : 'Mute');
-    }
-
-    cinemaClose.addEventListener('click', closeCinema); cinemaPlay.addEventListener('click', toggleCinemaPlay);
-    cinemaVideo.addEventListener('click', toggleCinemaPlay); cinemaMute.addEventListener('click', (e) => { e.stopPropagation(); toggleCinemaMute(); });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape'){ if (cinema.classList.contains('is-open')) closeCinema(); else if (gallery.classList.contains('is-open')) closeGallery(); }
-      if (gallery.classList.contains('is-open')){ if (e.key === 'ArrowRight') showSlide(gIndex + 1, true); if (e.key === 'ArrowLeft') showSlide(gIndex - 1, true); }
+      if (e.key === 'Escape'){ if (gallery.classList.contains('is-open')) closeGallery(); }
+      if (gallery.classList.contains('is-open')){ 
+          if (e.key === 'ArrowRight') { if(isCinematicMode) startCinematicLoop(); showSlide(gIndex + 1, true); }
+          if (e.key === 'ArrowLeft') { if(isCinematicMode) startCinematicLoop(); showSlide(gIndex - 1, true); }
+      }
     });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stopAutoplay(); else restartAutoplay(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stopAutoplay(); else if(!isCinematicMode) restartAutoplay(); });
 
     function updateMusicUI() {
       if (bgMusic.paused) {
@@ -1604,14 +1610,19 @@
     }
     musicToggle.addEventListener('click', toggleMusic);
 
-    /* Ensures background music attempts to play immediately when user taps anywhere (bypassing browser block) */
-    document.body.addEventListener('pointerdown', () => {
-      if (bgMusic.paused && !userHasMuted && !cinema.classList.contains('is-open')) {
-        bgMusic.play().then(updateMusicUI).catch(() => {});
-      }
-    }, { once: true });
+    function initAudio() {
+        if(audioStarted) return;
+        bgMusic.play().then(() => {
+            audioStarted = true;
+            updateMusicUI();
+        }).catch(() => { /* block handled safely */ });
+    }
     
-    bgMusic.play().then(updateMusicUI).catch(updateMusicUI);
+    initAudio(); 
+    
+    document.addEventListener('pointerdown', initAudio, { once: true });
+    document.addEventListener('touchstart', initAudio, { once: true });
+    document.addEventListener('keydown', initAudio, { once: true });
 
     function resize(){
       dpr = Math.min(window.devicePixelRatio || 1, 2);
