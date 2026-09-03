@@ -286,7 +286,6 @@
       will-change:transform, opacity; pointer-events:none;
     }
 
-    /* Fixed cut-off text issue: increased max-width, white-space, and clip-path padding */
     .wish{
       position:absolute; left:5.5%; bottom:10%; max-width:85%; z-index:6; pointer-events:none; color:var(--ink); visibility:hidden;
     }
@@ -320,7 +319,7 @@
       -webkit-background-clip:text; background-clip:text; color:transparent;
       filter: drop-shadow(0 1px 1px rgba(255,252,248,.98)) drop-shadow(0 2px 6px rgba(130,18,55,.45));
       clip-path:inset(-20% 100% -40% -20%); transform-origin:8% 60%;
-      white-space: nowrap; /* Ensures text doesn't wrap and break on smaller screens */
+      white-space: nowrap; 
     }
     .wish__rule{
       display:block; width:clamp(46px, 13vw, 110px); height:2px; margin:.12em 0 .48em;
@@ -363,8 +362,9 @@
     .replay:hover{ background:rgba(255,252,248,.92); }
     .replay svg{ opacity:.8; }
 
+    /* Fixed Issue 1: Surprise button moved UP so it does not overlap Happy Birthday */
     .continue {
-      position: absolute; left: 50%; bottom: 12%; z-index: 7; transform: translate(-50%, 15px);
+      position: absolute; left: 50%; bottom: 30%; z-index: 7; transform: translate(-50%, 15px);
       display: flex; flex-direction: row; align-items: center; justify-content: center;
       padding: 12px 36px; border-radius: 999px;
       background: rgba(255, 255, 255, 0.2); 
@@ -489,7 +489,6 @@
     .slide__play-btn:hover { background: rgba(255,255,255,0.4); transform: translate(-50%, -50%) scale(1.1); }
     .slide__play-btn.is-hidden { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.8); }
 
-    /* Fixed Arrows displaying on Mobile too */
     .gallery__arrow{
       position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%; z-index:3;
       display:flex; align-items:center; justify-content:center; color:#f6e6d6; background:rgba(255,255,255,.06);
@@ -502,7 +501,6 @@
     .gallery__arrow--prev{ left:clamp(6px, 2.4vw, 26px); }
     .gallery__arrow--next{ right:clamp(6px, 2.4vw, 26px); }
     
-    /* Slightly smaller arrows for mobile so they don't cover everything but are perfectly tappable */
     @media (max-width: 560px){ 
         .gallery__arrow { width: 36px; height: 36px; }
         .gallery__arrow--prev { left: 8px; }
@@ -525,15 +523,13 @@
     .gallery__cta:hover{ transform:translateY(-2px); filter:brightness(1.06); }
     .gallery__cta:active{ transform:translateY(0); }
 
-    /* Cinematic Mode Styles for Gallery */
-    /* Removed .roomClose and .gallery__arrow from here so they stay visible! */
     .gallery.is-cinematic .gallery__eyebrow,
     .gallery.is-cinematic .gallery__foot {
         opacity: 0 !important;
         pointer-events: none;
     }
     .gallery.is-cinematic .gallery__stage {
-        transform: scale(1.15); /* cinematic zoom effect */
+        transform: scale(1.15);
         box-shadow: 0 40px 100px -20px rgba(0,0,0,0.95);
     }
     .gallery.is-cinematic .gallery__stage::after,
@@ -554,7 +550,8 @@
   </style>
 </head>
 <body>
-  <audio id="bgMusic" src="./dataset/music.mp3" loop preload="auto" autoplay muted></audio>
+  <!-- Note: Removed the "muted" tag from the audio below. Our JS logic will now play it unmuted on first interaction! -->
+  <audio id="bgMusic" src="./dataset/music.mp3" loop preload="auto"></audio>
   
   <button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle music">
     <svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true">
@@ -1319,6 +1316,7 @@
     }
 
     archery.addEventListener('pointerdown', (e) => {
+      // Force init on pulling the bow!
       initAudio();
       
       if (played) return; drawing = true;
@@ -1558,7 +1556,6 @@
 
     continueBtn.addEventListener('click', openGallery); galleryClose.addEventListener('click', closeGallery);
     
-    // Updated arrows to just move and reset cinematic loop (so it doesn't close cinematic mode!)
     galleryNext.addEventListener('click', () => { 
         if(isCinematicMode) startCinematicLoop(); 
         showSlide(gIndex + 1, true); 
@@ -1610,19 +1607,23 @@
     }
     musicToggle.addEventListener('click', toggleMusic);
 
+    // --- AGGRESSIVE AUDIO AUTOPLAY FIX ---
     function initAudio() {
         if(audioStarted) return;
+        bgMusic.muted = false; // Force unmute via JS
         bgMusic.play().then(() => {
             audioStarted = true;
             updateMusicUI();
-        }).catch(() => { /* block handled safely */ });
+        }).catch(() => { /* Still blocked until interaction */ });
     }
     
+    // Attempt 1: Try immediately
     initAudio(); 
     
-    document.addEventListener('pointerdown', initAudio, { once: true });
-    document.addEventListener('touchstart', initAudio, { once: true });
-    document.addEventListener('keydown', initAudio, { once: true });
+    // Attempt 2: Play EXACTLY when user touches screen the first time (guaranteed to work)
+    ['click', 'touchstart', 'pointerdown', 'keydown'].forEach(evt => {
+        document.addEventListener(evt, initAudio, { once: true });
+    });
 
     function resize(){
       dpr = Math.min(window.devicePixelRatio || 1, 2);
